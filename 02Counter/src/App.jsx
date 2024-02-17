@@ -5,33 +5,45 @@ function App() {
   // useState(default_value) hook:  it's responsible for changing the state, it can propagate the change in ui(in dom)
   // it will return 2 values first is value and second is callback function to update that valu
   // let counter = 5;
-  let [counter, setCounter] = useState(5);
+  let [counter, setCounter] = useState(0);
   let [message, setMessage] = useState("");
 
   const updateMessage = () => {
     message = "Value is between 0-100 only.";
     setMessage(message);
-  }
+  };
   const increaseValue = () => {
-    counter++;
-    if(counter > 100){
-      counter = 100;
+    if (counter == 100) {
+      counter = 99;
       updateMessage();
-    }else{
+    } else {
       setMessage("");
     }
-    setCounter(counter);
+    // here value is updated only once, becoz useState(or in react itself) task are done in a batch and becoz we increase counter variable  4 time react consider it as a duplicate task so, it consider all as one task
+    setCounter(counter + 1);
+    // setCounter(counter + 1);
+    // setCounter(counter + 1);
+    // setCounter(counter + 1);
+
+    
+    /* 
+    for doing this now value increase by 4
+    setCounter((preCounter) => preCounter + 1);
+    setCounter((preCounter) => preCounter + 1);
+    setCounter((preCounter) => preCounter + 1);
+    setCounter((preCounter) => preCounter + 1);
+
+    */
     // console.log("Conter increase:", counter);
   };
   const decreaseValue = () => {
-    counter--;
-    if(counter < 0){
-      counter = 0;
+    if (counter < 1) {
+      counter = 1;
       updateMessage();
-    }else{
+    } else {
       setMessage("");
     }
-    setCounter(counter); 
+    setCounter(counter - 1);
     // console.log("Conter decrease:", counter);
   };
   return (
