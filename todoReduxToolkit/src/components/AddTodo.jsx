@@ -8,8 +8,12 @@ function AddTodo() {
 
   const addTodoHandler = (ev) => {
     ev.preventDefault();
-    dispatch(addTodo(input));
-    setInput('');
+    if (input.length > 0) {
+      dispatch(addTodo(input));
+      setInput("");
+    }else{
+      alert("Enter Todo Value");
+    }
   };
 
   return (
@@ -17,7 +21,7 @@ function AddTodo() {
       <input
         type="text"
         className="bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-        placeholder="Enter a Toad..."
+        placeholder="Enter a Todo..."
         value={input}
         onChange={(ev) => setInput(ev.target.value)}
       />
